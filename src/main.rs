@@ -30,7 +30,7 @@ async fn main() {
     let port = std::env::var("PORT")
         .ok()
         .and_then(|value| value.parse::<u16>().ok())
-        .unwrap_or(3000);
+        .unwrap_or(8169);
 
     let addr = SocketAddr::from(([0, 0, 0, 0], port));
 
