@@ -27,7 +27,12 @@ async fn main() {
         .fallback_service(ServeDir::new("static"))
         .layer(TraceLayer::new_for_http());
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let port = std::env::var("PORT")
+        .ok()
+        .and_then(|value| value.parse::<u16>().ok())
+        .unwrap_or(3000);
+
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
 
     tracing::info!("Server listening on http://{}", addr);
 
